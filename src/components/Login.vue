@@ -49,7 +49,7 @@ export default {
         password: this.credentials.password
       }
 
-      auth.login(this, credentials, 'testing')
+      auth.login(this, credentials, 'homepage')
 
     }
   }

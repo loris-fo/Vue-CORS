@@ -1,17 +1,8 @@
 import {router} from '../index'
 
-import Vue from 'vue'
-
 const API_URL = 'http://localhost:8080/'
 const LOGIN_URL = API_URL + 'api/login'
-const options = {
-  headers: {
-    "Accept" : "application/json; charset=utf-8",
-    "Content-Type": "application/json; charset=utf-8",
-    'Access-Control-Allow-Headers': '*'
-  },
-  crossOrigin: "http://localhost:8080"
-}
+const TEST = API_URL + 'api'
 
 export default {
 
@@ -19,15 +10,26 @@ export default {
     authenticated: false
   },
 
-
   login(context, creds, redirect) {
-    context.$http.post(LOGIN_URL, creds, options).then(response => {
-      console.log(response);
+    context.$http.post(LOGIN_URL, creds).then((data) => {
+      localStorage.setItem('access_token', data.access_token)
+      this.user.authenticated = true
+
+      if(redirect) {
+        router.go(redirect)
+      }
+    }, (err) => {
+      context.error = err
     })
   },
 
+  logout() {
+    localStorage.removeItem('access_token')
+    this.user.authenticated = false
+  },
+
   checkAuth() {
-    var jwt = localStorage.getItem('id_token')
+    var jwt = localStorage.getItem('access_token')
     if(jwt) {
       this.user.authenticated = true
     }
@@ -39,7 +41,7 @@ export default {
 
   getAuthHeader() {
     return {
-      'Authorization': 'Bearer ' + localStorage.getItem('id_token')
+      'Authorization': 'Bearer ' + localStorage.getItem('access_token')
     }
   }
 }
