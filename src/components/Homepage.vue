@@ -21,6 +21,7 @@ export default {
     getApi() {
       this.$http.get(API).then((response) => {
         console.log(response);
+
       }, (response) => {
         console.log(response);
       })

@@ -11,8 +11,9 @@ export default {
   },
 
   login(context, creds, redirect) {
-    context.$http.post(LOGIN_URL, creds).then((data) => {
-      localStorage.setItem('access_token', data.access_token)
+    context.$http.post(LOGIN_URL, creds).then((response) => {
+      console.log(response.data);
+      localStorage.setItem('access_token', response.data.access_token)
       this.user.authenticated = true
 
       if(redirect) {
