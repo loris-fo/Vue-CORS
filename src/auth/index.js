@@ -1,6 +1,6 @@
 import {router} from '../index'
 
-const API_URL = 'http://localhost:8080/'
+const API_URL = 'http://localhost:8081/'
 const LOGIN_URL = API_URL + 'api/login'
 const TEST = API_URL + 'api'
 

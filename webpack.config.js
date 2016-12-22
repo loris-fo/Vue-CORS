@@ -8,14 +8,7 @@ module.exports = {
     filename: 'build.js'
   },
   devServer: {
-    proxy: {
-      '/api': {
-        target: 'http://localhost:8080/',
-        secure: false,
-        changeOrigin: true,
-        logLevel: 'debug'
-      }
-    }
+    proxy:{ '/api/**': { target: 'http://localhost:8080', secure: false } }
   },
   // how modules should be transformed
   module: {

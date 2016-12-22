@@ -8,7 +8,7 @@
 <script>
 import auth from '../auth'
 
-const API = 'http://localhost:8080/api/v0.2';
+const API = 'http://localhost:8081/api/v0.2';
 
 export default {
 
